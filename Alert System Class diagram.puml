@@ -1,0 +1,74 @@
+@startuml
+
+interface system{
+Medical history: string
+Medication history: string
+Treatment plans: string
+PDI: string
+Lab resultater: string
+Diagnostiske billeder: billeder
+alert_popup(): bool
+registrering()
+}
+
+
+hospital <- "1..*" patient
+hospital <-- "1..*" medarbejder
+hospital "1..*" --o system
+medarbejder <|-- "1..*" receptionist
+alert_system *-- "1..*" alert
+system *- alert_system
+system <-- "1..*" patient : registreres i
+(system, patient) . alert_system : checker
+alert "0..*" ---> receptionist : kan ses af
+medarbejder <|-- "1..*" læge
+patient "0..*" <-- "0..1"  læge : diagnosticerer
+
+class læge{
+afdeling: string
+password: string
+login_status: string
+verficer_login()
+diagnosticer_multiresistent()
+Medical_history()
+Medication_history()
+}
+
+class hospital{
+lokation: string
+}
+
+class alert{
+bakterie_stamme: string
+popup_alert()
+}
+
+class alert_system{
+check_multiresistent(): bool
+}
+
+class medarbejder{
+navn: string
+medarbejderID: int
+job_type: string
+}
+
+class patient{
+navn: string
+alder: int
+køn: string
+adresse: string
+CPR: int
+har_multiresistent: bool
+}
+
+class receptionist{
+afdeling: string
+password: string
+login_status: string
+verificer_login(): bool
+patient_registrering()
+PDI()
+}
+
+@enduml
