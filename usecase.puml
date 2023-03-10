@@ -1,0 +1,32 @@
+@startuml
+
+actor Patient as p
+actor Receptionist as r
+actor Doctor as l
+
+package "Hospital reception" {
+   usecase "Oplyser CPR-nummer" as UC1
+   usecase "Registerer patient" as UC2
+   usecase "Fjerne patient" as UC3
+   usecase "Kontakte patient" as UC6
+   usecase "View patient info" as UC4
+}
+
+package "At the doctor" {
+    usecase "Konsultation" as UC7
+    usecase "View journal" as UC8
+    usecase "Redigere journal" as UC9
+}
+
+p -[#magenta]- UC1
+p -[#magenta]- UC7
+
+r -[#red]- UC2
+r -[#red]- UC3
+r -[#red]- UC4
+r -[#red]- UC6
+
+l -[#blue]- UC7
+l -[#blue]- UC8
+l -[#blue]- UC9
+@enduml
