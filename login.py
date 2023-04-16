@@ -7,7 +7,6 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-import subprocess
 
 
 class Ui_MainWindow(object):
