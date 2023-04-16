@@ -172,16 +172,6 @@ class Ui_MainWindow(object):
         self.label_2.setText(_translate("MainWindow", "Adgangskode:"))
         self.loginButton.setText(_translate("MainWindow", "Login"))
 
-    def login(self):
-            username = self.lineEdit.text()
-            password = self.lineEdit_2.text()
-
-            if username == "admin" and password == "admin":
-                    subprocess.Popen(['python', '/Users/kimlandgrebe/PycharmProjects/pythonProject/patientjournal.py'])
-                    print("Login successful")
-            else:
-                    print("Login failed")
-
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
