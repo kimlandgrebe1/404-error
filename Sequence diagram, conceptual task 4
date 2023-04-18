@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+Citizen -> Sundhed.dk: Login
+
+activate Citizen
+activate Sundhed.dk
+
+Sundhed.dk -> MitID: MitID initiation
+
+activate MitID
+
+MitID --> Citizen: Login with MitID
+Citizen -> MitID: 2 factor authentication
+MitID --> Citizen: Login Approved
+MitID --> Sundhed.dk: Authentication response
+
+deactivate MitID
+
+Sundhed.dk -> Sundhed.dk: redirect
+Sundhed.dk --> Citizen: Display medicinkortet
+Citizen -> Sundhed.dk: Renew prescription
+Sundhed.dk -> GP_system: Renewal application
+
+activate GP_system
+
+GP_system -> Doctor: Doctor notification
+
+activate Doctor
+
+alt renewal application: accepted
+    Doctor -> GP_system: renewal accepted
+    GP_system --> Sundhed.dk: acceptance response
+    Sundhed.dk --> Citizen: patient notification
+else renewal application: declined
+    Doctor -> GP_system: renewal declined
+
+    deactivate Doctor
+
+    GP_system --> Sundhed.dk: declined response
+
+    deactivate GP_system
+
+    Sundhed.dk --> Citizen: patient notification
+
+    deactivate Sundhed.dk
+    deactivate Citizen
+end
+@enduml
