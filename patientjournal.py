@@ -8,7 +8,6 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -195,7 +194,7 @@ class Ui_MainWindow(object):
         self.verticalLayout.addLayout(self.horizontalLayout_4)
         self.patientResistent = QtWidgets.QLabel(parent=self.centralwidget)
         self.patientResistent.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
-        self.patientResistent.setStyleSheet("#patientResistent { background: rgb(255, 0, 0)}")
+        #self.patientResistent.setStyleSheet("#patientResistent { background: rgb(255, 0, 0)}")
         self.patientResistent.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.patientResistent.setObjectName("patientResistent")
         self.verticalLayout.addWidget(self.patientResistent)
@@ -281,7 +280,7 @@ class Ui_MainWindow(object):
         self.pushButton_11.setText(_translate("MainWindow", "PushButton"))
         self.pushButton_10.setText(_translate("MainWindow", "PushButton"))
         self.pushButton_9.setText(_translate("MainWindow", "Ny konsultation"))
-        self.patientResistent.setText(_translate("MainWindow", "OBS - Patient er diagnosticeret med multiresistent bakterieinfektion"))
+        #self.patientResistent.setText(_translate("MainWindow", "OBS - Patient er diagnosticeret med multiresistent bakterieinfektion"))
         item = self.tableWidget.verticalHeaderItem(0)
         item.setText(_translate("MainWindow", "Navn"))
         item = self.tableWidget.verticalHeaderItem(1)
@@ -303,6 +302,13 @@ class Ui_MainWindow(object):
         item.setText(_translate("MainWindow", "DIagnoser"))
         self.listWidget_2.setSortingEnabled(__sortingEnabled)
 
+# Her starter min kode
+        # Connect søg patient funktionen to a function that opens patientsøgningen
+        self.pushButton_14.clicked.connect(self.patientsoegning)
+    # The function. which opens patientsøgning -function
+    def patientsoegning(self):
+        import subprocess
+        subprocess.run(["python", "patientsoegning.py"])
 
 if __name__ == "__main__":
     import sys

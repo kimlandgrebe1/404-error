@@ -7,7 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-
+import subprocess
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -170,6 +170,30 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Brugernavn:"))
         self.label_2.setText(_translate("MainWindow", "Adgangskode:"))
         self.loginButton.setText(_translate("MainWindow", "Login"))
+
+# Her starter min kode
+        # Connect the login button to a function that checks the username and password
+        self.loginButton.clicked.connect(self.handleLogin)
+
+    def handleLogin(self):
+        us = self.lineEdit.text()
+        pw = self.lineEdit_2.text()
+        f = open("Loginbrugernavne.txt", "r")
+        # Flag sørger for at funktionen kun kører en gang, og ikke kører for hvert log-in
+        flag = False  # set the flag to False initially
+        for line in f.readlines():
+            us, pw = line.strip().split("|")
+            # Check if the username and password are correct
+            if self.lineEdit.text() == us and self.lineEdit_2.text() == pw:
+                # If the login is successful, launch a new Python file
+                subprocess.run(["python", "patientjournal.py"])
+                flag = True  # set the flag to True after executing the code inside the if statement
+        if not flag:
+            #If the login fails, show an error message
+            msgBox = QtWidgets.QMessageBox()
+            msgBox.setText("Incorrect username or password.")
+            msgBox.exec()
+
 
 if __name__ == "__main__":
     import sys

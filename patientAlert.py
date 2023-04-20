@@ -21,14 +21,14 @@ class Ui_Form(object):
         self.verticalLayout_2 = QtWidgets.QVBoxLayout()
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.OBSpatient = QtWidgets.QLabel(parent=Form)
-        self.OBSpatient.setStyleSheet("#OBSpatient { background: rgb(255, 255, 255) }")
+        self.OBSpatient.setStyleSheet("#OBSpatient { background: rgb(255, 172, 248) }")
         self.OBSpatient.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.OBSpatient.setObjectName("OBSpatient")
         self.verticalLayout_2.addWidget(self.OBSpatient)
         self.okButton = QtWidgets.QPushButton(parent=Form)
         self.okButton.setStyleSheet("QPushButton\n"
 "{\n"
-"  background-color: rgb(255, 255, 255);\n"
+" background-color: rgb(255, 172, 248);\n"
 "  border-width: 0px;\n"
 "  border-radius: 3px;\n"
 "}\n"
@@ -46,6 +46,14 @@ class Ui_Form(object):
         self.OBSpatient.setText(_translate("Form", "OBS: Patienten har en multiresistent bakterieinfektion"))
         self.okButton.setText(_translate("Form", "Forstået"))
 
+
+#Her starter min kode
+        # Connect søg patient funktionen to function that opens patientsøgningen
+        self.okButton.clicked.connect(self.patientsoegning)
+
+    def patientsoegning(self):
+        import subprocess
+        subprocess.run(["python", "patientjournal.py"])
 
 if __name__ == "__main__":
     import sys

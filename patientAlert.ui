@@ -24,7 +24,7 @@
      <item>
       <widget class="QLabel" name="OBSpatient">
        <property name="styleSheet">
-        <string notr="true">#OBSpatient { background: rgb(255, 255, 255) }</string>
+        <string notr="true">#OBSpatient { background: rgb(255, 172, 248) }</string>
        </property>
        <property name="text">
         <string>OBS: Patienten har en multiresistent bakterieinfektion</string>
@@ -39,7 +39,7 @@
        <property name="styleSheet">
         <string notr="true">QPushButton
 {
-  background-color: rgb(255, 255, 255);
+ background-color: rgb(255, 172, 248);
   border-width: 0px;
   border-radius: 3px;
 }
