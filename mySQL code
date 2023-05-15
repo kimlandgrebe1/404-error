@@ -1,0 +1,12 @@
+SELECT * FROM mydb.Patient;
+
+
+DELETE FROM `mydb`.`Patient` WHERE Patient_ID='1';
+
+INSERT INTO `mydb`.`Patient` (`Patient_ID`,`CPR`, `Fornavn`, `Efternavn`, `Adresse`, `Køn`, `Telefon`)
+VALUES  ('1','030699-1234', 'Sophie', 'Larsen', 'Oak Street 19', 'Kvinde','12345678'), 
+		    ('2','150500-2345', 'Noah', 'Jensen', 'Maple Lane 6', 'Mand','87654321'),
+        ('3','290198-3456', 'Emily', 'Nielsen', 'Elm Avenue 10', 'Kvinde','23456789'),
+        ('4','070399-4567', 'Oliver', 'Hansen', 'Chestnut Street 2', 'Mand','98765432');
+        
+        
