@@ -1,31 +1,25 @@
-
 @startuml
+top to bottom direction
 
-interface system{
-Medical history: string
-Medication history: string
-Treatment plans: string
+interface SP_system {
+Medical_history: string
+Medication_history: string
+Treatment_plans: string
 PDI: string
-Lab resultater: string
-Diagnostiske billeder: billeder
-alert_popup(): bool
-registrering()
+Lab_resultater: string
+Diagnostiske_billeder: billeder
+Registrering()
 }
 
-relateret_person "1..*" -- hospital
-relateret_person <|- patient
-relateret_person <|-- medarbejder
-hospital "1..*" --o system
-Users <|-- "1..*" receptionist
-alert_system *-- "1..*" alert : popper op
-system *-- alert_system : checker
-system -- "1..*" patient : registreres i
-alert "0..*" -- receptionist : kan ses af
-Users <|-- "1..*" læge
-patient "0..*" -- "0..1"  læge : diagnosticerer
-medarbejder <|- Users
+class Hospital {
+Hospitalsnavn: string
+Region: string
+Kommune: string
+Vejnavn: string
+Vejnummer: int
+}
 
-class relateret_person{
+class Relateret_person {
 Fornavn: string
 Efternavn: string
 Alder: int
@@ -35,48 +29,69 @@ Adresse: string
 Telefon: int
 }
 
-class læge{
-login_status: string
-verficer_login(): bool
-diagnosticer_multiresistent()
-Medical_history()
-Medication_history()
-}
-
-class Users{
-Username: string
-Password: string
-}
-
-class hospital{
-lokation: string
-}
-
-class alert{
-bakterie_stamme: string
-popup_alert()
-}
-
-class alert_system{
-check_multiresistent(): bool
-}
-
-class medarbejder{
+class Medarbejder {
 medarbejderID: int
 afdeling: string
 job_type: string
 }
 
-class patient{
-har_multiresistent: bool
+class Patient {
+Patient_ID: int
 }
 
-class receptionist{
-password: string
-login_status: string
-verificer_login(): bool
-patient_registrering()
-PDI()
+class Users {
+sername: string
+Password: string
 }
+
+class Læge {
+Login_status: bool
+Konsulterer()
+Tager_prøve()
+}
+
+class Laboratorie {
+prøve_resultater: string
+Multi_resistent_sygdom: bool
+analyserer_prøve()
+}
+
+class Multiresistent_register {
+Patient_CPR: string
+MRS_type: string
+tilføj_positiv()
+fjern_negativ()
+}
+
+class SP_interface {
+Current_user_ID: int
+verificer_login()
+}
+
+class Alert_system {
+Varsels_tekst: sting
+Alert_send()
+Check_CPR()
+}
+
+class EPJ {
+}
+
+Hospital "1..*" --o SP_system
+Relateret_person "1..*" --> Hospital: har noget at gøre med
+Medarbejder --|> Relateret_person
+Patient --|> Relateret_person
+Users --|> Medarbejder
+Læge --|> Users
+Læge --> "1..*" Patient: consults
+Læge "1..*" --> Laboratorie: sender prøve
+Laboratorie "1..*" --> Multiresistent_register: with CPR
+SP_interface --* SP_system: er en del af
+Alert_system --> SP_interface: sends alert
+Multiresistent_register <- Alert_system: Check CPR
+Patient *-- EPJ
+EPJ "1..*" --> SP_interface: visible on
+
+
 
 @enduml
